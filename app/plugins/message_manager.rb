@@ -1,6 +1,5 @@
 # encoding: utf-8
 class MessageManager < Base
-
   match /message:list/i, :method => :index
   match /message:add (.+)/i, :method => :create
   match /message:show (\d)/i, :method => :show
@@ -13,36 +12,36 @@ class MessageManager < Base
 
   def show(m, id)
     begin
-      m.reply("#{m.user.nick}: #{Message.find(id).content}")
+      m.reply Message.find(id).content, true
     rescue
-      m.reply("#{m.user.nick}: Mensagem não encontrada.")
+      m.reply "Mensagem não encontrada.", true
     end
   end
 
   def create(m, text)
     begin
       Message.create(:content => text, :type_of_message => 'answer')
-      m.reply("#{m.user.nick}: Mensagem criada com sucesso!")
+      m.reply "Mensagem criada com sucesso!", true
     rescue
-      m.reply("#{m.user.nick}: Aconteceu algum erro na sua solicitação.")
+      m.reply "Aconteceu algum erro na sua solicitação.", true
     end
   end
 
   def update(m, id, text)
     begin
       Message.find(id).update_attributes(:content => text)
-      m.reply("#{m.user.nick}: Mensagem atualizada com sucesso!")
+      m.reply "Mensagem atualizada com sucesso!", true
     rescue
-      m.reply("#{m.user.nick}: Aconteceu algum erro na sua solicitação.")
+      m.reply "Aconteceu algum erro na sua solicitação.", true
     end
   end
 
   def destroy(m, id)
     begin
       Message.find(id).destroy
-      m.reply("#{m.user.nick}: Mensagem apagada com sucesso!")
+      m.reply "Mensagem apagada com sucesso!", true
     rescue
-      m.reply("#{m.user.nick}: Aconteceu algum erro na sua solicitação.")
+      m.reply "Aconteceu algum erro na sua solicitação.", true
     end
   end
 end

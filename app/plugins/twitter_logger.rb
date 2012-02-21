@@ -1,17 +1,14 @@
 # encoding: utf-8
 class TwitterLogger < Base
-
   match /^[zurg].+o que (.+) anda fazendo no twitter[?]$/i, :use_prefix => false
 
   def execute(m, nick)
     begin
-      Twitter::user_timeline(nick)[0,5].map(&:text).each do |tweet|
-        m.reply("#{m.user.nick}: #{tweet}")
-      end
+      Twitter::user_timeline(nick)[0,5].map(&:text).each {|tweet| m.reply tweet, true }
     rescue Twitter::Error::NotFound
-      m.reply("#{m.user.nick}: FUUU, usuário não encontrado.")
+      m.reply "FFFUUU, usuário não encontrado.", true
     rescue 
-      m.reply("#{m.user.nick}: Aconteceu algum erro, meu camarada.")
+      m.reply "Aconteceu algum erro, meu camarada.", true
     end
   end
 end
