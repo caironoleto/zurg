@@ -1,0 +1,3 @@
+production:
+  logger: false
+  uri: <%= ENV['MONGOHQ_URL'] || 'mongodb://localhost/zurg' %>
