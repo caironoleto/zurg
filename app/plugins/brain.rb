@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Brain < Base
   match /^zurg.+vida.+universo.+[?]$/, :use_prefix => false, :method => :life
+  match /^zurg.+seu.+código[?]$/, :use_prefix => false, :method => :repository
   match /^(bot|zurg).+[^?!]$/i, :use_prefix => false, :method => :message
   match /help/, :method => :help
 
@@ -24,6 +25,10 @@ class Brain < Base
 
   def life(m)
     m.reply "#{m.user.nick}: A resposta para a pergunta fundamental sobra a vida, o Universo e tudo mais é 42."
+  end
+
+  def repository(m)
+    m.reply "Meu código fonte está em https://github.com/caironoleto/zurg", true
   end
 
   private
