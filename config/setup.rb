@@ -22,7 +22,6 @@ require 'plugins/brain'
 require 'plugins/twitter_logger'
 require 'plugins/lastfm'
 require 'plugins/message_manager'
-require 'models/log'
 require 'models/message'
 
 ActiveRecord::Migrator.migrate('./migrations')
