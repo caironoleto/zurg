@@ -17,11 +17,12 @@ ActiveRecord::Base.establish_connection(
   :encoding => 'utf8'
 )
 
-require 'zorg'
-require 'log'
-require 'twitter_logger'
-require 'lastfm'
-require 'message'
-require 'message_manager'
+require 'plugins/base'
+require 'plugins/brain'
+require 'plugins/twitter_logger'
+require 'plugins/lastfm'
+require 'plugins/message_manager'
+require 'models/log'
+require 'models/message'
 
 ActiveRecord::Migrator.migrate('./migrations')

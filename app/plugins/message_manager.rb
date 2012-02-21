@@ -1,6 +1,5 @@
 # encoding: utf-8
-class MessageManager
-  include Cinch::Plugin
+class MessageManager < Base
 
   match /message:list/i, :method => :index
   match /message:add (.+)/i, :method => :create

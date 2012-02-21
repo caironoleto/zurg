@@ -1,13 +1,12 @@
 # encoding: utf-8
-class Lastfm
-  include Cinch::Plugin
+class Lastfm < Base
 
   match /^[zurg].+o que (.+) anda fazendo no lastfm[?]$/i, :use_prefix => false, :method => :recent_musics
   match /^[zurg].+mais informações sobre (.+)[!]$/i, :use_prefix => false, :method => :band_information
 
   def initialize(*args)
     super
-    Rockstar.lastfm = {:api_key => '538f629544f06d6e0fee5b3d882034ed', :api_secret => "65f464045ee23e1ba43fc6439b0048c0"}
+    Rockstar.lastfm = { :api_key => ENV['LASTFM_KEY'], :api_secret => ENV['LASTFM_SECRET'] }
   end
 
   def recent_musics(m, nick)

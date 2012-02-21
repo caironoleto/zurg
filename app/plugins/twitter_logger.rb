@@ -1,6 +1,5 @@
 # encoding: utf-8
-class TwitterLogger
-  include Cinch::Plugin
+class TwitterLogger < Base
 
   match /^[zurg].+o que (.+) anda fazendo no twitter[?]$/i, :use_prefix => false
 

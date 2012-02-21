@@ -8,6 +8,6 @@ Cinch::Bot.new do
     c.nick        = 'zurg'
     c.password    = ENV['IRC_PASSWORD']
     c.channels    = ["##gurupi"]
-    c.plugins.plugins = [Zorg, TwitterLogger, Lastfm, MessageManager]
+    c.plugins.plugins = [Brain, TwitterLogger, Lastfm, MessageManager]
   end
 end.start
