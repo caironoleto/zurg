@@ -2,6 +2,7 @@
 class Brain < Base
   match /^zurg.+vida.+universo.+[?]$/, :use_prefix => false, :method => :life
   match /^zurg.+seu.+código[?]$/, :use_prefix => false, :method => :repository
+  match /^zurg.+leis.+rob[oó]tica[?!]$/, :use_prefix => false, :method => :laws_of_robotics
   match /^(bot|zurg).+[^?!]$/i, :use_prefix => false, :method => :message
   match /help/, :method => :help
 
@@ -11,6 +12,9 @@ class Brain < Base
     m.reply "o que <user> anda fazendo no twitter? => Retorna os últimos 5 tweets do usuário"
     m.reply "o que <user> anda fazendo no lastfm? => Retorna as últimas 5 músicas do usuário"
     m.reply "mais informações sobre <banda>! => Retorna informações sobre a banda"
+    m.reply "onde está seu código? => Retorna o endereço do repositório"
+    m.reply "cite as leis da robótica! => Retorna as leis da robótica"
+    m.reply "Quais são as leis da robótica? => Retorna as leis da robótica"
     m.reply "Mensagens:"
     m.reply "!message:add <mensagem> => Adiciona uma mensagem"
     m.reply "!message:list => Lista todas as mensagens"
@@ -29,6 +33,12 @@ class Brain < Base
 
   def repository(m)
     m.reply "Meu código fonte está em https://github.com/caironoleto/zurg", true
+  end
+
+  def laws_of_robotics(m)
+    m.reply "Um robô não pode ferir um ser humano ou, por omissão, permitir que um ser humano sofra algum mal", true
+    m.reply "Um robô deve obedecer as ordens que lhe sejam dadas por seres humanos, exceto nos casos em que tais ordens entrem em conflito com a Primeira Lei", true
+    m.reply "Um robô deve proteger sua própria existência desde que tal proteção não entre em conflito com a Primeira e/ou a Segunda Lei", true
   end
 
   private
