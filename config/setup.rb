@@ -1,4 +1,3 @@
-$:.unshift(File.expand_path(File.dirname(__FILE__), "app"))
 require 'rubygems'
 require 'bundler'
 Bundler.setup

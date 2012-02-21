@@ -1,4 +1,5 @@
 $:.unshift(File.expand_path(File.dirname(__FILE__), "config"))
+$:.unshift(File.expand_path(File.dirname(__FILE__), "app"))
 require 'setup'
 
 Cinch::Bot.new do
