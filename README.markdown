@@ -13,4 +13,4 @@
 
 ## License
 
-zurg is releases under the MIT license, more details see MIT-LICENSE.
+zurg is released under the MIT license, more details see MIT-LICENSE.
