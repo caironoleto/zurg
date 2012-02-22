@@ -20,7 +20,7 @@ require 'plugins/brain'
 require 'plugins/twitter_logger'
 require 'plugins/lastfm'
 require 'plugins/message_manager'
-require 'plugins/wearther'
+require 'plugins/weather'
 require 'models/message'
 
 ActiveRecord::Migrator.migrate('./migrations')

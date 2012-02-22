@@ -1,13 +1,13 @@
 # encoding: utf-8
 class Wearther < Base
-  match /^[zurg].+como.+tempo.+em\s(.+)[?]$/, :use_prefix => false, :method => :wearther
+  match /^[zurg].+como.+tempo.+em\s(.+)[?]$/, :use_prefix => false, :method => :weather
 
   def initialize(*args)
     super
     GeoPlanet.appid = ENV['YAHOO_APP_ID']
   end
 
-  def wearther(m, location)
+  def weather(m, location)
     results = GeoPlanet::Place.search(location)
     if results.any?
       city = results.first
