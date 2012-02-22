@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Wearther < Base
-  match /^[zurg].+como.+tempo.+em\s(.+)[?]$/, :use_prefix => false, :method => :weather
+  match /^[zurg].+como.+tempo.+em\s(.+)[?]$/i, :use_prefix => false, :method => :weather
 
   def initialize(*args)
     super
@@ -15,7 +15,7 @@ class Wearther < Base
       if result.document_root.to_s =~ /Error/
         m.reply "Infelizmente rolou algum erro na sua solicitação.", true
       else
-        m.reply "Está fazendo em #{result.location["city"]}, #{result.condition["temp"]} °C", true
+        m.reply "Está fazendo em #{result.location["city"]} #{result.condition["temp"]} °C", true
       end
     else
       m.reply "Não existe esse lugar cara", true
