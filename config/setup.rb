@@ -2,8 +2,6 @@ require 'rubygems'
 require 'bundler'
 Bundler.setup
 Bundler.require
-ENV["RACK_ENV"] = 'production'
-
 require 'uri'
 
 db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/zurg')
@@ -22,6 +20,7 @@ require 'plugins/brain'
 require 'plugins/twitter_logger'
 require 'plugins/lastfm'
 require 'plugins/message_manager'
+require 'plugins/wearther'
 require 'models/message'
 
 ActiveRecord::Migrator.migrate('./migrations')
