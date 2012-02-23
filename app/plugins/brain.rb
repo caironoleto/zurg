@@ -1,11 +1,11 @@
 # encoding: utf-8
 class Brain < Base
-  match /^zurg.+vida.+universo.+[?]$/i, :use_prefix => false, :method => :life
-  match /^zurg.+seu.+código[?]$/i, :use_prefix => false, :method => :repository
-  match /^zurg.+leis.+rob[oó]tica[?!]$/i, :use_prefix => false, :method => :laws_of_robotics
-  match /^zurg.+tempo.+180\sgraus[?]$/i, :use_prefix => false, :method => :weather_on_180
-  match /^(bot|zurg).+[^?!]$/i, :use_prefix => false, :method => :message
-  match /help/, :method => :help
+  match /^zurg.+vida.+universo.+[?]$/i, :use_prefix => false, :method => :life, :group => :conversation
+  match /^zurg.+seu.+código[?]$/i, :use_prefix => false, :method => :repository, :group => :conversation
+  match /^zurg.+tempo.+180\sgraus[?]$/i, :use_prefix => false, :method => :weather_on_180, :group => :conversation
+  match /^zurg.+leis.+rob[oó]tica[?!]$/i, :use_prefix => false, :method => :laws_of_robotics, :group => :conversation
+  match /^(bot|zurg).+[^?!]$/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /help/, :method => :help, :group => :conversation
 
   def help(m)
     m.reply "Comandos:"
