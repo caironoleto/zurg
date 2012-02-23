@@ -3,7 +3,7 @@ class Brain < Base
   match /^zurg.+vida.+universo.+[?]$/i, :use_prefix => false, :method => :life
   match /^zurg.+seu.+código[?]$/i, :use_prefix => false, :method => :repository
   match /^zurg.+leis.+rob[oó]tica[?!]$/i, :use_prefix => false, :method => :laws_of_robotics
-  mathc /^zurg.+tempo.+180\sgraus[?]$/i, :use_prefix => false, :method => :weather_on_180
+  match /^zurg.+tempo.+180\sgraus[?]$/i, :use_prefix => false, :method => :weather_on_180
   match /^(bot|zurg).+[^?!]$/i, :use_prefix => false, :method => :message
   match /help/, :method => :help
 
