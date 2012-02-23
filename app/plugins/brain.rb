@@ -2,12 +2,11 @@
 class Brain
   include Cinch::Plugin
 
+  match /help/, :method => :help
   match /^zurg.+vida.+universo.+[?]$/i, :use_prefix => false, :method => :life, :group => :conversation
   match /^zurg.+seu.+código[?]$/i, :use_prefix => false, :method => :repository, :group => :conversation
-  match /^zurg.+tempo.+180\sgraus[?]$/i, :use_prefix => false, :method => :weather_on_180, :group => :conversation
   match /^zurg.+leis.+rob[oó]tica[?!]$/i, :use_prefix => false, :method => :laws_of_robotics, :group => :conversation
-  match /^(bot|zurg).+[^?!]$/i, :use_prefix => false, :method => :message, :group => :conversation
-  match /help/, :method => :help, :group => :conversation
+  match /^(bot|zurg).+$/i, :use_prefix => false, :method => :message, :group => :conversation
 
   def help(m)
     m.reply "Comandos:"
@@ -42,10 +41,6 @@ class Brain
     m.reply "Um robô não pode ferir um ser humano ou, por omissão, permitir que um ser humano sofra algum mal", true
     m.reply "Um robô deve obedecer as ordens que lhe sejam dadas por seres humanos, exceto nos casos em que tais ordens entrem em conflito com a Primeira Lei", true
     m.reply "Um robô deve proteger sua própria existência desde que tal proteção não entre em conflito com a Primeira e/ou a Segunda Lei", true
-  end
-
-  def weather_on_180(m)
-    m.reply "O tempo eu não sei, mas a pressão lá está só subindo", true
   end
 
   private

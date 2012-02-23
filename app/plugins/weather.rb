@@ -1,7 +1,8 @@
 # encoding: utf-8
 class Wearther
   include Cinch::Plugin
-  match /^[zurg].+como.+tempo.+(em|no|na)\s(.+)[?]$/i, :use_prefix => false, :method => :weather
+  match /^zurg.+tempo.+180\sgraus[?]$/i, :use_prefix => false, :method => :weather_on_180, :group => :conversation
+  match /^[zurg].+como.+tempo.+(em|no|na)\s(.+)[?]$/i, :use_prefix => false, :method => :weather, :group => :conversation
 
   def initialize(*args)
     super
@@ -21,5 +22,9 @@ class Wearther
     else
       m.reply "Não existe esse lugar cara", true
     end
+  end
+
+  def weather_on_180(m)
+    m.reply "O tempo eu não sei, mas a pressão lá está só subindo", true
   end
 end
