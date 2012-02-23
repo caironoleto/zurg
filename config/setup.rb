@@ -15,12 +15,11 @@ ActiveRecord::Base.establish_connection(
   :encoding => 'utf8'
 )
 
-require 'plugins/base'
-require 'plugins/brain'
-require 'plugins/twitter_logger'
+require 'models/message'
 require 'plugins/lastfm'
 require 'plugins/message_manager'
+require 'plugins/twitter_logger'
 require 'plugins/weather'
-require 'models/message'
+require 'plugins/brain'
 
 ActiveRecord::Migrator.migrate('./migrations')
