@@ -6,7 +6,7 @@ class Brain
   match /^zurg.+vida.+universo.+[?]$/i, :use_prefix => false, :method => :life, :group => :conversation
   match /^zurg.+seu.+código[?]$/i, :use_prefix => false, :method => :repository, :group => :conversation
   match /^zurg.+leis.+rob[oó]tica[?!]$/i, :use_prefix => false, :method => :laws_of_robotics, :group => :conversation
-  match /^(bot|zurg).+$/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /.+(bot|zurg).+/i, :use_prefix => false, :method => :message, :group => :conversation
 
   def help(m)
     m.reply "Comandos:"
