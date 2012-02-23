@@ -1,5 +1,6 @@
 # encoding: utf-8
-class Wearther < Base
+class Wearther
+  include Cinch::Plugin
   match /^[zurg].+como.+tempo.+(em|no|na)\s(.+)[?]$/i, :use_prefix => false, :method => :weather
 
   def initialize(*args)

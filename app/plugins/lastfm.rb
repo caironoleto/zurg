@@ -1,5 +1,7 @@
 # encoding: utf-8
-class Lastfm < Base
+class Lastfm
+  include Cinch::Plugin
+
   match /^[zurg].+o que (.+) anda fazendo no lastfm[?]$/i, :use_prefix => false, :method => :recent_musics
   match /^[zurg].+mais informações sobre (.+)[!]$/i, :use_prefix => false, :method => :band_information
 

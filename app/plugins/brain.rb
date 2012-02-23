@@ -1,5 +1,7 @@
 # encoding: utf-8
-class Brain < Base
+class Brain
+  include Cinch::Plugin
+
   match /^zurg.+vida.+universo.+[?]$/i, :use_prefix => false, :method => :life, :group => :conversation
   match /^zurg.+seu.+código[?]$/i, :use_prefix => false, :method => :repository, :group => :conversation
   match /^zurg.+tempo.+180\sgraus[?]$/i, :use_prefix => false, :method => :weather_on_180, :group => :conversation
