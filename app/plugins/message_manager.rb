@@ -1,5 +1,6 @@
 # encoding: utf-8
 class MessageManager
+  attr_accessor :mutex
   include Cinch::Plugin
   match /message:list/i, :method => :index
   match /message:add (.+)/i, :method => :create
@@ -7,15 +8,24 @@ class MessageManager
   match /message:destroy (\d)/i, :method => :destroy
   match /message:update (\d) (.+)/i, :method => :update
 
+  def initialize(*args)
+    super
+    self.mutex = Mutex.new
+  end
+
   def index(m)
-    Message.all.each{|c| m.user.send("[#{c.id}] #{c.content}") }
+    begin
+      Message.all.each{|c| m.user.send("[#{c.id}] #{c.content}") }
+    rescue Exception => e
+      m.reply "Aconteceu algum erro na sua solicitação. #{e.inspect}", true
+    end
   end
 
   def show(m, id)
     begin
       m.reply Message.find(id).content, true
-    rescue
-      m.reply "Mensagem não encontrada.", true
+    rescue Exception => e
+      m.reply "Aconteceu algum erro na sua solicitação. #{e.inspect}", true
     end
   end
 
@@ -23,26 +33,38 @@ class MessageManager
     begin
       Message.create(:content => text, :type_of_message => 'answer')
       m.reply "Mensagem criada com sucesso!", true
-    rescue
-      m.reply "Aconteceu algum erro na sua solicitação.", true
+    rescue Exception => e
+      m.reply "Aconteceu algum erro na sua solicitação. #{e.inspect}", true
     end
   end
 
   def update(m, id, text)
     begin
-      Message.find(id).update_attributes(:content => text)
-      m.reply "Mensagem atualizada com sucesso!", true
-    rescue
-      m.reply "Aconteceu algum erro na sua solicitação.", true
+      mutex.synchronize do
+        message = Message.find(id)
+        if message.update_attributes(:content => text)
+          m.reply "Mensagem atualizada com sucesso!", true
+        else
+          m.reply "Aconteceu algum erro na sua solicitação. #{message.errors.inspect}", true
+        end
+      end
+    rescue Exception => e
+      m.reply "Aconteceu algum erro na sua solicitação. #{e.inspect}", true
     end
   end
 
   def destroy(m, id)
     begin
-      Message.find(id).destroy
-      m.reply "Mensagem apagada com sucesso!", true
-    rescue
-      m.reply "Aconteceu algum erro na sua solicitação.", true
+      mutex.synchronize do
+        message = Message.find(id)
+        if message.destroy
+          m.reply "Mensagem apagada com sucesso!", true
+        else
+          m.reply "Aconteceu algum erro na sua solicitação. #{message.errors.inspect}", true
+        end
+      end
+    rescue Exception => e
+      m.reply "Aconteceu algum erro na sua solicitação. #{e.inspect}", true
     end
   end
 end
