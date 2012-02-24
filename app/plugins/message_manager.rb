@@ -4,9 +4,9 @@ class MessageManager
   include Cinch::Plugin
   match /message:list/i, :method => :index
   match /message:add (.+)/i, :method => :create
-  match /message:show (\d)/i, :method => :show
-  match /message:destroy (\d)/i, :method => :destroy
-  match /message:update (\d) (.+)/i, :method => :update
+  match /message:show (\d+)/i, :method => :show
+  match /message:destroy (\d+)/i, :method => :destroy
+  match /message:update (\d+) (.+)/i, :method => :update
 
   def initialize(*args)
     super
