@@ -3,10 +3,13 @@ class Brain
   include Cinch::Plugin
 
   match /help/, :method => :help
-  match /^zurg.+vida.+universo.+[?]$/i, :use_prefix => false, :method => :life, :group => :conversation
-  match /^zurg.+seu.+código[?]$/i, :use_prefix => false, :method => :repository, :group => :conversation
+  match /^zurg.+vida.+universo.+\??$/i, :use_prefix => false, :method => :life, :group => :conversation
+  match /^zurg.+seu.+c[oó]digo(\sfonte?)?\??$/i, :use_prefix => false, :method => :repository, :group => :conversation
   match /^zurg.+leis.+rob[oó]tica[?!]$/i, :use_prefix => false, :method => :laws_of_robotics, :group => :conversation
-  match /(bot|zurg)/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /\s(bot|zurg)[^azAZ09]+/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /^(bot|zurg)[^azAZ09]+/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /\s(bot|zurg)$/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /^(bot|zurg)$/i, :use_prefix => false, :method => :message, :group => :conversation
 
   def help(m)
     m.reply "Comandos:"
@@ -26,7 +29,7 @@ class Brain
   end
 
   def message(m)
-    m.reply random_message, true if Message.any?
+    m.reply random_message(m), true if Message.any?
   end
 
   def life(m)
@@ -45,7 +48,11 @@ class Brain
 
   private
 
-  def random_message
-    Message.where(:type_of_message => 'answer').order("RANDOM()").first.try(:content)
+  def random_message(m)
+    if (m.user.nick == 'rogerio')
+      Message.where(:id => [3,4,11,23,31,37,40,45,52,51,53,55,56,57,36,61,62,63]).order("RANDOM()").first.try(:content)
+    else
+      Message.where(:type_of_message => 'answer').order("RANDOM()").first.try(:content)
+    end
   end
 end

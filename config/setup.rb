@@ -4,7 +4,7 @@ Bundler.setup
 Bundler.require
 require 'uri'
 
-db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/zurg')
+db = URI.parse(ENV['DATABASE_URL'] || 'postgres://postgres:123456@localhost/zurg')
 
 ActiveRecord::Base.establish_connection(
   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
