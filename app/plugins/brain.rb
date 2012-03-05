@@ -6,8 +6,8 @@ class Brain
   match /^zurg.+vida.+universo.+\??$/i, :use_prefix => false, :method => :life, :group => :conversation
   match /^zurg.+seu.+c[oó]digo(\sfonte?)?\??$/i, :use_prefix => false, :method => :repository, :group => :conversation
   match /^zurg.+leis.+rob[oó]tica[?!]$/i, :use_prefix => false, :method => :laws_of_robotics, :group => :conversation
-  match /\s(bot|zurg)[^azAZ09]+/i, :use_prefix => false, :method => :message, :group => :conversation
-  match /^(bot|zurg)[^azAZ09]+/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /\s(bot|zurg)[^a-zA-Z0-9]+/i, :use_prefix => false, :method => :message, :group => :conversation
+  match /^(bot|zurg)[^a-zA-Z0-9]+/i, :use_prefix => false, :method => :message, :group => :conversation
   match /\s(bot|zurg)$/i, :use_prefix => false, :method => :message, :group => :conversation
   match /^(bot|zurg)$/i, :use_prefix => false, :method => :message, :group => :conversation
 
