@@ -7,7 +7,7 @@ Cinch::Bot.new do
     c.server      = "irc.freenode.org"
     c.nick        = 'zurg'
     c.password    = ENV['IRC_PASSWORD']
-    c.channels    = ["##gurupi", "#guru-mg"]
+    c.channels    = ENV['CHANNELS'].split(",")
     c.plugins.plugins = [Lastfm, MessageManager, TwitterLogger, Wearther, Brain]
   end
 end.start
